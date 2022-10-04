@@ -11,7 +11,6 @@ function Login(props) {
   const validation = (senhaPar, emailPar) => {
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordLength = 6;
-    console.log(senhaPar, emailPar);
     setInvalid(!(senhaPar.length >= passwordLength && regexEmail.test(emailPar)));
   };
 
