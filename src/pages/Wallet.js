@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import { fetchCurrency } from '../redux/actions';
+import Table from '../components/Table';
 
 function Wallet(props) {
   useEffect(() => {
@@ -15,6 +16,7 @@ function Wallet(props) {
     <section>
       <Header />
       <WalletForm />
+      <Table />
     </section>
   );
 }

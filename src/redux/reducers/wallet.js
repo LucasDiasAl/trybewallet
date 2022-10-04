@@ -12,7 +12,7 @@ const wallet = (state = CURRENCIES, action) => {
     return {
       ...state,
       exchangeRates: action.value,
-      currencies: Object.keys(action.value),
+      currencies: Object.keys(action.value).filter((cur) => cur !== 'USDT'),
     };
   case 'SAVE_DESPESA':
     return {

@@ -8,7 +8,7 @@ function WalletForm(props) {
   const metodosPagamento = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
   const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
-  const [valor, setValor] = useState(0);
+  const [valor, setValor] = useState('');
   const [moeda, setMoeda] = useState('USD');
   const [pagamento, setPag] = useState('Dinheiro');
   const [tag, setTag] = useState(tags[0]);
@@ -26,9 +26,10 @@ function WalletForm(props) {
     exchangeFetch();
     const { saveExpense, expenses, exchangeRates } = props;
     const id = expenses.length;
+    const correctValue = valor === '' ? 0 : valor;
     const dados = Object.fromEntries([
       ['id', id],
-      ['value', valor],
+      ['value', correctValue],
       ['currency', moeda],
       ['method', pagamento],
       ['tag', tag],
@@ -62,7 +63,7 @@ function WalletForm(props) {
             onChange={ ({ target: { value } }) => setMoeda(value) }
           >
             {
-              currencies.filter((cur) => cur !== 'USDT').map((curr) => (
+              currencies.map((curr) => (
                 <option value={ curr } key={ curr }>{ curr }</option>
               ))
             }
