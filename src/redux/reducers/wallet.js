@@ -3,7 +3,9 @@ const CURRENCIES = {
   exchangeRates: {},
   currencies: [],
   expenses: [],
-  totalExpense: 0.00,
+  totalExpense: '0.00',
+  edit: false,
+  idToEdit: 0,
 };
 
 const wallet = (state = CURRENCIES, action) => {
@@ -29,6 +31,20 @@ const wallet = (state = CURRENCIES, action) => {
       ...state,
       expenses: [...action.value],
     };
+  case 'EDITAR_DESPESA':
+    return {
+      ...state,
+      edit: action.value.edit,
+      idToEdit: action.value.id,
+    };
+  case 'EDITAR_SALVAR': {
+    const newExpense = [...state.expenses];
+    newExpense[state.idToEdit] = action.value;
+    return {
+      ...state,
+      expenses: newExpense,
+    };
+  }
   default:
     return { ...state };
   }

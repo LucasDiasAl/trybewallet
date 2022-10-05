@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { exDespesa } from '../redux/actions';
+import { exDespesa, editDespesa } from '../redux/actions';
 
 function Table(props) {
-  const { allExpenses, attDespesa } = props;
+  const { allExpenses, attDespesa, editDesp } = props;
 
   const convert = (num1, num2 = 1) => {
     const radix = 10;
@@ -16,8 +16,11 @@ function Table(props) {
 
   const excludeButton = ({ target: { name } }) => {
     const newExpenses = allExpenses.filter(({ id }) => id !== Number(name));
-    console.log(newExpenses, name);
     attDespesa(newExpenses);
+  };
+
+  const editButton = ({ target: { name } }) => {
+    editDesp({ edit: true, id: Number(name) });
   };
 
   return (
@@ -57,6 +60,14 @@ function Table(props) {
                 <td>
                   <button
                     type="button"
+                    name={ id }
+                    onClick={ editButton }
+                    data-testid="edit-btn"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
                     onClick={ excludeButton }
                     name={ id }
                     data-testid="delete-btn"
@@ -79,11 +90,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   attDespesa: (value) => dispatch(exDespesa(value)),
+  editDesp: (value) => dispatch(editDespesa(value)),
 });
 
 Table.propTypes = {
   allExpenses: PropTypes.arrayOf(PropTypes.shape).isRequired,
   attDespesa: PropTypes.func.isRequired,
+  editDesp: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

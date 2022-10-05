@@ -13,3 +13,7 @@ export const saveDespesa = (value) => ({ type: 'SAVE_DESPESA', value });
 export const updateDespesa = (value) => ({ type: 'UPDATE_EXPENSE', value });
 
 export const exDespesa = (value) => ({ type: 'EXCLUIR_DESPESA', value });
+
+export const editDespesa = (value) => ({ type: 'EDITAR_DESPESA', value });
+
+export const saveEdit = (value) => ({ type: 'EDITAR_SALVAR', value });

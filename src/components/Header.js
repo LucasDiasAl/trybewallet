@@ -16,10 +16,10 @@ function Header(props) {
         );
         return tmp;
       }, 0);
-      const refactor = parseInt((value * 100), radixNumber) / 100;
+      const refactor = (parseInt((value * 100), radixNumber) / 100).toString();
       newDespesa(refactor);
     } else {
-      const zero = (0).toFixed(2);
+      const zero = ((0).toFixed(2));
       newDespesa(zero);
     }
   }, [expenses, newDespesa, totalExpense]);
@@ -60,7 +60,7 @@ Header.propTypes = {
   email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape).isRequired,
   newDespesa: PropTypes.func.isRequired,
-  totalExpense: PropTypes.number.isRequired,
+  totalExpense: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

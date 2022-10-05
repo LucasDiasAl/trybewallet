@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrency, saveDespesa } from '../redux/actions';
+import { fetchCurrency, saveDespesa, saveEdit, editDespesa } from '../redux/actions';
 
 function WalletForm(props) {
-  const { currencies, exchangeFetch } = props;
+  const { currencies, exchangeFetch, expenses, edit } = props;
   const metodosPagamento = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
   const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
@@ -14,6 +14,19 @@ function WalletForm(props) {
   const [tag, setTag] = useState(tags[0]);
   const [descri, setDescri] = useState('');
 
+  useEffect(() => {
+    const { idToEdit } = props;
+    if (edit) {
+      const [{ value, currency, method, tag: taggin, description }] = expenses
+        .filter(({ id: curr }) => curr === Number(idToEdit));
+      setValor(value);
+      setMoeda(currency);
+      setPag(method);
+      setTag(taggin);
+      setDescri(description);
+    }
+  }, [props, expenses, edit]);
+
   const reset = () => {
     setValor('');
     setMoeda('USD');
@@ -22,10 +35,9 @@ function WalletForm(props) {
     setDescri('');
   };
 
-  const handlButtonClick = () => {
-    exchangeFetch();
-    const { saveExpense, expenses, exchangeRates } = props;
-    const id = expenses.length;
+  const editFalseSave = (idOnEdit, editVerifc) => {
+    const { exchangeRates } = props;
+    const id = editVerifc ? idOnEdit : expenses.length;
     const correctValue = valor === '' ? 0 : valor;
     const dados = Object.fromEntries([
       ['id', id],
@@ -36,8 +48,20 @@ function WalletForm(props) {
       ['description', descri],
       ['exchangeRates', exchangeRates],
     ]);
+    return dados;
+  };
+
+  const handlButtonClick = () => {
+    exchangeFetch();
+    const { saveExpense, editExpense, editDesp, idToEdit } = props;
+    const dados = editFalseSave(idToEdit, edit);
+    if (!edit) {
+      saveExpense(dados);
+    } else {
+      editExpense(dados);
+      editDesp({ edit: false, id: 0 });
+    }
     reset();
-    saveExpense(dados);
   };
 
   return (
@@ -61,6 +85,7 @@ function WalletForm(props) {
             id="moedas"
             data-testid="currency-input"
             onChange={ ({ target: { value } }) => setMoeda(value) }
+            value={ moeda }
           >
             {
               currencies.map((curr) => (
@@ -76,6 +101,7 @@ function WalletForm(props) {
             id="metodo"
             data-testid="method-input"
             onChange={ ({ target: { value } }) => setPag(value) }
+            value={ pagamento }
           >
             {
               metodosPagamento.map((curr) => (
@@ -91,6 +117,7 @@ function WalletForm(props) {
             id="tags"
             data-testid="tag-input"
             onChange={ ({ target: { value } }) => setTag(value) }
+            value={ tag }
           >
             {
               tags.map((curr) => (
@@ -117,7 +144,7 @@ function WalletForm(props) {
           type="button"
           onClick={ handlButtonClick }
         >
-          Adicionar despesa
+          {edit ? 'Editar despesa' : 'Adicionar despesa'}
         </button>
 
       </form>
@@ -129,11 +156,15 @@ const mapStateToProps = (state) => ({
   exchangeRates: state.wallet.exchangeRates,
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  edit: state.wallet.edit,
+  idToEdit: state.wallet.idToEdit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   saveExpense: (value) => dispatch(saveDespesa(value)),
+  editExpense: (value) => dispatch(saveEdit(value)),
   exchangeFetch: () => dispatch(fetchCurrency()),
+  editDesp: (value) => dispatch(editDespesa(value)),
 });
 
 WalletForm.propTypes = {
@@ -142,6 +173,10 @@ WalletForm.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape).isRequired,
   saveExpense: PropTypes.func.isRequired,
   exchangeFetch: PropTypes.func.isRequired,
+  edit: PropTypes.bool.isRequired,
+  idToEdit: PropTypes.number.isRequired,
+  editExpense: PropTypes.func.isRequired,
+  editDesp: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
