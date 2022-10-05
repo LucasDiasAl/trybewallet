@@ -18,8 +18,11 @@ function Header(props) {
       }, 0);
       const refactor = parseInt((value * 100), radixNumber) / 100;
       newDespesa(refactor);
+    } else {
+      const zero = (0).toFixed(2);
+      newDespesa(zero);
     }
-  }, [expenses, newDespesa]);
+  }, [expenses, newDespesa, totalExpense]);
 
   return (
     <section>

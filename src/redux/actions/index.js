@@ -11,3 +11,5 @@ export const fetchCurrency = () => (dispatch) => {
 export const saveDespesa = (value) => ({ type: 'SAVE_DESPESA', value });
 
 export const updateDespesa = (value) => ({ type: 'UPDATE_EXPENSE', value });
+
+export const exDespesa = (value) => ({ type: 'EXCLUIR_DESPESA', value });

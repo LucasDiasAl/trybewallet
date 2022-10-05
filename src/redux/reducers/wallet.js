@@ -24,6 +24,11 @@ const wallet = (state = CURRENCIES, action) => {
       ...state,
       totalExpense: action.value,
     };
+  case 'EXCLUIR_DESPESA':
+    return {
+      ...state,
+      expenses: [...action.value],
+    };
   default:
     return { ...state };
   }

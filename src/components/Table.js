@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { exDespesa } from '../redux/actions';
+
 function Table(props) {
+  const { allExpenses, attDespesa } = props;
+
   const convert = (num1, num2 = 1) => {
     const radix = 10;
     const multi = (parseFloat(num1, radix) * parseFloat(num2, radix));
@@ -10,7 +14,12 @@ function Table(props) {
     return result;
   };
 
-  const { allExpenses } = props;
+  const excludeButton = ({ target: { name } }) => {
+    const newExpenses = allExpenses.filter(({ id }) => id !== Number(name));
+    console.log(newExpenses, name);
+    attDespesa(newExpenses);
+  };
+
   return (
     <table>
       <thead>
@@ -45,6 +54,16 @@ function Table(props) {
                 <td>{ askDecimals }</td>
                 <td>{ convertValue }</td>
                 <td>Real</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={ excludeButton }
+                    name={ id }
+                    data-testid="delete-btn"
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             );
           })
@@ -58,8 +77,13 @@ const mapStateToProps = (state) => ({
   allExpenses: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  attDespesa: (value) => dispatch(exDespesa(value)),
+});
+
 Table.propTypes = {
   allExpenses: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  attDespesa: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
