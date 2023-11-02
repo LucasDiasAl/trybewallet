@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrency, saveDespesa, saveEdit, editDespesa } from '../redux/actions';
+import { fetchCurrency, saveDespesa, saveEdit, editDespesa } from '../../redux/actions';
+import './walletForm.css';
 
 function WalletForm(props) {
   const { currencies, exchangeFetch, expenses, edit } = props;
@@ -65,9 +66,9 @@ function WalletForm(props) {
   };
 
   return (
-    <section>
-      <form>
-        <label htmlFor="valor">
+    <div className="wallet__form__main">
+      <form className="wallet__form__inputs">
+        <label htmlFor="valor" className="inputs__form">
           Valor:
           <input
             data-testid="value-input"
@@ -79,7 +80,7 @@ function WalletForm(props) {
           />
         </label>
 
-        <label htmlFor="moedas">
+        <label htmlFor="moedas" className="inputs__form">
           Moeda:
           <select
             id="moedas"
@@ -95,7 +96,7 @@ function WalletForm(props) {
           </select>
         </label>
 
-        <label htmlFor="metodo">
+        <label htmlFor="metodo" className="inputs__form">
           Métodos de pagamento:
           <select
             id="metodo"
@@ -111,7 +112,7 @@ function WalletForm(props) {
           </select>
         </label>
 
-        <label htmlFor="tags">
+        <label htmlFor="tags" className="inputs__form">
           Tags:
           <select
             id="tags"
@@ -129,11 +130,12 @@ function WalletForm(props) {
 
         <label
           htmlFor="descriçao"
+          className="descricao__form"
         >
           Descrição:
-          <input
+          <textarea
             data-testid="description-input"
-            type="areatext"
+            type="text"
             id="descriçao"
             value={ descri }
             onChange={ ({ target: { value } }) => setDescri(value) }
@@ -141,6 +143,7 @@ function WalletForm(props) {
         </label>
 
         <button
+          className="btn__submit"
           type="button"
           onClick={ handlButtonClick }
         >
@@ -148,7 +151,7 @@ function WalletForm(props) {
         </button>
 
       </form>
-    </section>
+    </div>
   );
 }
 

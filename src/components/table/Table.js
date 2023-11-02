@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { exDespesa, editDespesa } from '../redux/actions';
+import { exDespesa, editDespesa } from '../../redux/actions';
+import './table.css';
 
 function Table(props) {
   const { allExpenses, attDespesa, editDesp } = props;

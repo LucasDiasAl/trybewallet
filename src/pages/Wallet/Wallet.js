@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
-import WalletForm from '../../components/WalletForm';
+import WalletForm from '../../components/walletForm/WalletForm';
 import { fetchCurrency } from '../../redux/actions';
-import Table from '../../components/Table';
+import Table from '../../components/table/Table';
 import './wallet.css';
 
 function Wallet(props) {
@@ -16,8 +16,10 @@ function Wallet(props) {
   return (
     <section className="wallet__main">
       <Header />
-      <WalletForm />
-      <Table />
+      <div className="wallet__info">
+        <WalletForm />
+        <Table />
+      </div>
     </section>
   );
 }
