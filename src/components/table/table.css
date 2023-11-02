@@ -1,0 +1,92 @@
+.table__main {
+  display: flex;
+  width: 60%;
+  max-height: 75vh;
+  background-color: rgba(255, 255, 255, 0.123);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0.4rem 0.8rem #0005;
+  border-radius: 1rem;
+  overflow: scroll;
+}
+
+.table__main table {
+  color: aliceblue;
+  width: 95%;
+  max-height: calc(90% - 0.8rem);
+  background-color: var(--cinza-escuro);
+  margin: 0.8rem;
+  border-radius: 20px;
+}
+
+table,
+th,
+td {
+  padding: 0.5rem;
+  border-collapse: collapse;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+thead {
+  border: 10px;
+}
+
+thead th:first-child {
+  border-radius: 10px 0px 0px 0px;
+}
+
+thead th:last-child {
+  border-radius: 0px 10px 0px 0px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: var(--cinza-medio);
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--cinza-medio);
+}
+
+tbody tr:hover {
+  background-color: var(--cinza-claro);
+}
+
+.table__main::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.table__main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+.table__main:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+tbody button {
+  margin: 2px;
+  border: none;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: aliceblue;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px -12px rgb(12, 12, 12);
+}
+
+.btn__editar {
+  background-color: var(--verde-midia);
+}
+
+.btn__excluir {
+  background-color: var(--vermelho-midia);
+}

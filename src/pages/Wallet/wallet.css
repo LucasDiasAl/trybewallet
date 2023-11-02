@@ -1,20 +1,22 @@
 .wallet__main {
-  background-color: rgb(217, 217, 236);
+  background-color: var(--cinza-medio);
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .wallet__header {
+  color: var(--verde-midia);
   width: 100vw;
   height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 50px;
-  background-color: red;
+  background-color: var(--cinza-escuro);
   opacity: 0.9;
   top: 0;
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.5);

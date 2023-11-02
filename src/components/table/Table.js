@@ -25,63 +25,67 @@ function Table(props) {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Descrição</th>
-          <th scope="col">Tag</th>
-          <th scope="col">Método de pagamento</th>
-          <th scope="col">Valor</th>
-          <th scope="col">Moeda</th>
-          <th scope="col">Câmbio utilizado</th>
-          <th scope="col">Valor convertido</th>
-          <th scope="col">Moeda de conversão</th>
-          <th scope="col">Editar/Excluir</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          allExpenses.map(({ description, tag, method,
-            value, currency, exchangeRates, id }) => {
-            const [[, { name, ask }]] = Object.entries(exchangeRates)
-              .filter(([key]) => key === currency);
-            const convertValue = convert(ask, value);
-            const valueDecimals = convert(value);
-            const askDecimals = convert(ask);
-            return (
-              <tr key={ id }>
-                <td>{ description }</td>
-                <td>{ tag }</td>
-                <td>{ method }</td>
-                <td>{ valueDecimals }</td>
-                <td>{ name }</td>
-                <td>{ askDecimals }</td>
-                <td>{ convertValue }</td>
-                <td>Real</td>
-                <td>
-                  <button
-                    type="button"
-                    name={ id }
-                    onClick={ editButton }
-                    data-testid="edit-btn"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    type="button"
-                    onClick={ excludeButton }
-                    name={ id }
-                    data-testid="delete-btn"
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            );
-          })
-        }
-      </tbody>
-    </table>
+    <div className="table__main">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Método de pagamento</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Moeda</th>
+            <th scope="col">Câmbio utilizado</th>
+            <th scope="col">Valor convertido</th>
+            <th scope="col">Moeda de conversão</th>
+            <th scope="col">Editar/Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            allExpenses.map(({ description, tag, method,
+              value, currency, exchangeRates, id }) => {
+              const [[, { name, ask }]] = Object.entries(exchangeRates)
+                .filter(([key]) => key === currency);
+              const convertValue = convert(ask, value);
+              const valueDecimals = convert(value);
+              const askDecimals = convert(ask);
+              return (
+                <tr key={ id }>
+                  <td>{ description }</td>
+                  <td>{ tag }</td>
+                  <td>{ method }</td>
+                  <td>{ valueDecimals }</td>
+                  <td>{ name }</td>
+                  <td>{ askDecimals }</td>
+                  <td>{ convertValue }</td>
+                  <td>Real</td>
+                  <td>
+                    <button
+                      className="btn__editar"
+                      type="button"
+                      name={ id }
+                      onClick={ editButton }
+                      data-testid="edit-btn"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="btn__excluir"
+                      type="button"
+                      onClick={ excludeButton }
+                      name={ id }
+                      data-testid="delete-btn"
+                    >
+                      Excluir
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
   );
 }
 

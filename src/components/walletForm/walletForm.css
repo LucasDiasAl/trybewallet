@@ -1,10 +1,11 @@
 .wallet__form__main {
+  color: aliceblue;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   margin: 30px;
   border-radius: 25px;
-  background-color: aquamarine;
+  background-color: var(--cinza-escuro);
   width: 35%;
   height: 70%;
   box-sizing: border-box;
@@ -35,7 +36,7 @@
 
 .inputs__form > input,
 select {
-  width: 220px;
+  width: 10vw;
   padding: 6px 10px;
   outline: none;
   border: none;
@@ -44,7 +45,7 @@ select {
 }
 
 .inputs__form > input {
-  width: 200px !important;
+  width: 9vw !important;
 }
 
 .descricao__form {
@@ -82,6 +83,7 @@ select {
   font-weight: 800;
   letter-spacing: 2px;
   cursor: pointer;
+  color: aliceblue;
   box-shadow: 0px 0px 20px rgb(12, 12, 12, 0.3);
-  background-color: rgb(253, 253, 253);
+  background-color: var(--cinza-medio);
 }
