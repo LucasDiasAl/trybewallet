@@ -25,24 +25,23 @@ function Header(props) {
   }, [expenses, newDespesa, totalExpense]);
 
   return (
-    <section>
-      <section>
+    <div className="wallet__header">
+      <div className="info__fields">
         <h2 data-testid="email-field">
-          {`Email:  ${email}`}
+          {`Conta:  ${email}`}
         </h2>
-        <div>
-          <h2>
-            Despesa total: R$
-          </h2>
-          <h2 data-testid="total-field">
-            {totalExpense}
-          </h2>
-          <h2 data-testid="header-currency-field">
-            BRL
-          </h2>
-        </div>
-      </section>
-    </section>
+      </div>
+      <div className="info__fields">
+        <h1>
+          carteira
+        </h1>
+      </div>
+      <div className="info__fields">
+        <h2>
+          {`Despesa total: R$ ${totalExpense} BRL`}
+        </h2>
+      </div>
+    </div>
   );
 }
 
