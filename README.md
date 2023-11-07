@@ -27,6 +27,6 @@ npm install
 ```
 npm start
 ```
->Apos rodar localmento acesse o site pelo endereço:
+>Após rodar localmento acesse o site pelo endereço:
 <a>http://localhost:3000/</a>
 
