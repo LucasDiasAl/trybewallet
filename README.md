@@ -29,5 +29,5 @@ npm start
 ```
 >Acesse o site pelo navegador no endereço:
 ```
-<a>http://localhost:3000/<a/>
+http://localhost:3000/
 ```
